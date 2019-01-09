@@ -5,10 +5,11 @@ import TabContent from './TabContent';
 class App extends Component {
 
   state = {
-    items: [],
     sorted: [],
     included: [],
-    index: 0
+    index: 0,
+    id : "",
+    tabContent: []
   }
 
   async componentDidMount() {
@@ -16,6 +17,7 @@ class App extends Component {
     const json = await res.json();
     const items = (json && json.data) || [];
     const included = (json && json.included) || [];
+    const firstCategoryId = included[0].id;
 
     const sorted = included.map((category) => {
       let id = category.id;
@@ -23,47 +25,38 @@ class App extends Component {
         let itemCategories = item.relationships.field_categories.data;
         acc[id] = acc[id] || [];
         itemCategories.forEach((category) => {
-          category.id === id && acc[id].push(item);
+          return category.id === id && acc[id].push(item);
         });
         return acc;
       }, {});
     });
-    
-    this.setState({ items, sorted, included });
+
+    const tabContent = sorted[0][firstCategoryId];
+    this.setState({ sorted, included, tabContent, id: firstCategoryId });
   }
 
-  handleTabClick = index => this.setState({index: index})
+  handleTabClick = (index, id) => {
+    const newTabContent = this.state.sorted[index][id];
+    this.setState({index: index, id: id, tabContent: newTabContent})
+  }
 
-  render(props, { included=[], sorted=[] }) {
-
+  render(props, { included=[], tabContent = [] }) {
     return (
-      <div>
+      <div class="container">
         <div class="tabsNav">
           { included.map( (tab, index) => (
-            <Tab tab={tab} handleTabClick={() => this.handleTabClick(index)} />
+            <Tab tab={tab} handleTabClick={() => this.handleTabClick(index, tab.id)} />
           )) }
         </div>
 
         <div class="tabsContent">
           {
-            included.map((element, index) => (
-              <TabContent tabContent={sorted[index][element.id]} active={this.state.index === index}/>
-            ))
+            <TabContent tabContent={tabContent} />
           }
         </div>
-
       </div>
     );
   }
 }
 
 export default App;
-
-const modal = ({props}) => {
-  <div class="modal">
-    <img src="http://192.168.3.199/sites/default/files/styles/grid_item/public/2019-01/cico.jpg?itok=Dhj1MFA0" alt="asd"/>
-    <h2>Name</h2>
-    <p>Bio</p>
-    <p>Career</p>
-  </div>
-}

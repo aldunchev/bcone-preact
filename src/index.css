@@ -11,22 +11,44 @@ h2 {
   overflow: hidden;
 }
 
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
 .tabsNav {
   display: flex;
 }
 
-.tabItem:nth-child(2n + 1) {
-  background-color: #f1f1f1;
+.tabsNavItem {
+  padding: 10px;
+  font-size: 14px;
 }
 
-.tabsContent {
+.tab {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.tabItem {
+  flex-basis: 20%;
+  padding: 10px;
 }
 
 .tab:not(.active) {
   display: none;
 }
 
-.modal:not(.active) {
-  display: none;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
