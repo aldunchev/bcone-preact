@@ -15,17 +15,25 @@ class Modal extends Component {
 
     return (
       <div class="modal">
-        <img src={`${GLOBALS.domain}${imgSrc}`} alt={imgAlt}/>
-        <h2>{ field_name }</h2>
-        <div>
-          <h4>Biography</h4>
-          { biography }
+        <div className="modal__inner">
+          <div className="modal__content">
+            <div className="modal__left">
+              <img src={`${GLOBALS.domain}${imgSrc}`} alt={imgAlt}/>
+            </div>
+            <div className="modal__right">
+              <h2>{ field_name }</h2>
+              <div>
+                <h4>Biography</h4>
+                { biography }
+              </div>
+              <div>
+                <h4>Career</h4>
+                { career }
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <h4>Career</h4>
-          { career }
-        </div>
-        <div onClick={props.close}>Close</div>
+        <div class="modal__close" onClick={props.close}></div>
       </div>
     )
   }

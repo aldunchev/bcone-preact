@@ -43,7 +43,7 @@ class App extends Component {
   render(props, { included=[], tabContent = [] }) {
     return (
       <div class="container">
-        <div class="tabsNav">
+        <div class="tabs__nav">
           { included.map( (tab, index) => (
             <Tab tab={tab} handleTabClick={() => this.handleTabClick(index, tab.id)} />
           )) }

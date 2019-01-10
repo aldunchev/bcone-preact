@@ -16,23 +16,25 @@ h2 {
   margin: auto;
 }
 
-.tabsNav {
+.tabs__nav {
   display: flex;
 }
 
-.tabsNavItem {
+.tabs__nav__item {
   padding: 10px;
   font-size: 14px;
 }
 
-.tabsContent {
+.tabs__content {
   display: flex;
   flex-wrap: wrap;
 }
 
-.tabItem {
+.tabs__item {
   flex-basis: 20%;
   padding: 10px;
+  cursor: pointer;
+  min-width: 0;
 }
 
 .modal {
@@ -41,7 +43,50 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #ccc;
+  background-color: #fafafa;
+}
+
+.modal__inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.modal__content {
+  display: flex;
+  padding: 100px 5%;
+}
+
+.modal__right {
+  margin-left: 5%;
+}
+
+.modal__close {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.modal__close::before,
+.modal__close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 1px;
+  background-color: #000;
+}
+
+.modal__close::before {
+  transform: rotate(45deg);
+}
+
+.modal__close::after {
+  transform: rotate(-45deg);
 }
 
 img {

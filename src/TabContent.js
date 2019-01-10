@@ -11,11 +11,12 @@ class TabContent extends Component {
   handleModalToggle = (item) => {
     const active = this.state.modalOpen;
     this.setState({modalOpen: !active, item: item});
+    document.body.style.overflow = !active ? 'hidden' : '';
   }
 
   render ({ tabContent }) {
     return (
-      <div class="tabsContent">
+      <div class="tabs__content">
         {
           tabContent.map(item => {
             let imgData = item.relationships.field_picture.data.meta;
@@ -23,7 +24,7 @@ class TabContent extends Component {
             let imgAlt = imgData.alt;
 
             return (
-              <div class="tabItem" onClick={() => this.handleModalToggle(item)}>
+              <div class="tabs__item" onClick={() => this.handleModalToggle(item)}>
                 <img src={`${GLOBALS.domain}${imgSrc}`} alt={imgAlt}/>
                 <h2>{item.attributes.field_name}</h2>
               </div>
