@@ -25,7 +25,7 @@ h2 {
   font-size: 14px;
 }
 
-.tab {
+.tabsContent {
   display: flex;
   flex-wrap: wrap;
 }
@@ -33,10 +33,6 @@ h2 {
 .tabItem {
   flex-basis: 20%;
   padding: 10px;
-}
-
-.tab:not(.active) {
-  display: none;
 }
 
 .modal {

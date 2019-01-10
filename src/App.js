@@ -48,12 +48,7 @@ class App extends Component {
             <Tab tab={tab} handleTabClick={() => this.handleTabClick(index, tab.id)} />
           )) }
         </div>
-
-        <div class="tabsContent">
-          {
-            <TabContent tabContent={tabContent} />
-          }
-        </div>
+        {<TabContent tabContent={tabContent} />}
       </div>
     );
   }

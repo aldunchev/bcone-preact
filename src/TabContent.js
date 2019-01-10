@@ -1,18 +1,6 @@
 import { h, Component } from 'preact';
 import { GLOBALS } from './Globals';
-
-const Modal = (props) => {
-  // const {field_name}
-  return (
-    <div class="modal">
-      <img src="http://192.168.3.199/sites/default/files/styles/grid_item/public/2019-01/cico.jpg?itok=Dhj1MFA0" alt="asd"/>
-      <h2>Name</h2>
-      <p>Bio</p>
-      <p>Career</p>
-      <div onClick={props.close}>Close</div>
-    </div>
-  )
-}
+import Modal from './Modal';
 
 class TabContent extends Component {
   state = {
@@ -25,15 +13,18 @@ class TabContent extends Component {
     this.setState({modalOpen: !active, item: item});
   }
 
-  render ({ tabContent, active }) {
+  render ({ tabContent }) {
     return (
-      <div>
+      <div class="tabsContent">
         {
           tabContent.map(item => {
-            let imgSrc = item.relationships.field_picture.data.meta.derivatives.grid_item.url;
+            let imgData = item.relationships.field_picture.data.meta;
+            let imgSrc = imgData.derivatives.grid_item.url;
+            let imgAlt = imgData.alt;
+
             return (
               <div class="tabItem" onClick={() => this.handleModalToggle(item)}>
-                <img src={`${GLOBALS.domain}${imgSrc}`} alt="Alt"/>
+                <img src={`${GLOBALS.domain}${imgSrc}`} alt={imgAlt}/>
                 <h2>{item.attributes.field_name}</h2>
               </div>
             )
